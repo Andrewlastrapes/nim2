@@ -19,3 +19,9 @@
 .inputs {
 	padding-top: 10%;
 }
+
+.won {
+	text-align: center;
+	padding-top: 10%;
+	font-size: 2em;
+}

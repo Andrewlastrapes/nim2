@@ -1,12 +1,17 @@
+// Variables
+
 var $choice1 = $("#choice")
 var $choice2 = $("#choice2")
 var $button = $(".button")
 var $button2 = $(".button2")
 var $turn = $(".turn")
+var $won = $(".won")
+var $heap1 = $(".heap1")
+var $heap2 = $(".heap2")
 
 
 
-
+// State
 
 var state = {
 	turn: "Player 1",
@@ -15,16 +20,34 @@ var state = {
 }
 
 
+// Initial appends
+
+$turn.append(state.turn)
+$heap1.append(state.pieces1)
+$heap2.append(state.pieces2)
+
+
+// Function to determine winner.
+
+function hasWon(){
+	if (state.pieces1== 0 & state.pieces2 == 0){
+		$won.append(state.turn + " Wins!")
+	}
+}
+
+
+// Funtion to change turn
+
 
 function changeTurn(){
 	if (state.turn == "Player 1"){
 		state.turn = "Player 2"
-		console.log(state.turn)
 	} else if (state.turn == "Player 2"){
 		state.turn = "Player 1"
-		console.log(state.turn)
 	}
-	$turn.append(state.turn)
+	$turn.empty();
+	$turn.append(state.turn);
+	
 }
 
 
@@ -35,14 +58,17 @@ $button.on("click", function(){
 	if (isNaN($choice1.val())){
 		alert("Please pick a number between 1 and " + state.pieces1)
 	}	else if ($choice1.val() > state.pieces1 | $choice1.val() < 0 ) { 
-			alert("Please pick a number between 1 and " + state.pieces1)
+			alert("Please pick a number between 1 and " + state.pieces1);
 	} 	else {
 			state.pieces1 = state.pieces1 - $choice1.val()
-			console.log(state.pieces1)
 			if (state.pieces1 == 0){
-				console.log("heap finished")
+				$heap1.empty();
+				$heap1.append(state.pieces1)
+				hasWon();
 			} else {
-				changeTurn()
+				$heap1.empty();
+				$heap1.append(state.pieces1)
+				changeTurn();
 			} 
 	}
 });
@@ -55,12 +81,19 @@ $button2.on("click", function(){
 	}	else if ($choice2.val() > state.pieces2 | $choice2.val() < 0 ) { 
 			alert("Please pick a number between 1 and " + state.pieces2)
 	} 	else {
-			state.pieces2 = state.pieces2 - $choice2.val()
-			console.log(state.pieces2)
+			state.pieces2 = state.pieces2 - $choice2.val();
 			if (state.pieces2 == 0){
-				console.log("heap finished")
+				$heap2.empty();
+				$heap2.append(state.pieces2)
+				hasWon();
 			} else {
-				changeTurn()
+				$heap2.empty();
+				$heap2.append(state.pieces2)
+				changeTurn();
 			}
 	}
 });
+
+
+
+
