@@ -9,6 +9,15 @@ var $won = $(".won")
 var $heap1 = $(".heap1")
 var $heap2 = $(".heap2")
 
+var $image = $("<img />",{
+	"class" : "heap1",
+	"src" : "piece.png.png"
+})
+
+var $image2 = $("<img />",{
+	"class" : "heap2",
+	"src" : "piece.png.png"
+})
 
 
 // State
@@ -20,11 +29,23 @@ var state = {
 }
 
 
+
+
 // Initial appends
 
 $turn.append(state.turn)
-$heap1.append(state.pieces1)
-$heap2.append(state.pieces2)
+
+
+// $heap1.append($image)
+$image.appendTo($heap1)
+$image2.appendTo($heap2)
+
+
+
+// Function for appending image
+
+
+
 
 
 // Function to determine winner.
@@ -68,6 +89,7 @@ $button.on("click", function(){
 			} else {
 				$heap1.empty();
 				$heap1.append(state.pieces1)
+				$image.appendTo($heap1)
 				changeTurn();
 			} 
 	}
@@ -89,7 +111,9 @@ $button2.on("click", function(){
 			} else {
 				$heap2.empty();
 				$heap2.append(state.pieces2)
+				$image2.appendTo($heap2)
 				changeTurn();
+
 			}
 	}
 });
