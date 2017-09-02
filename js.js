@@ -2,6 +2,7 @@ var $choice1 = $("#choice")
 var $choice2 = $("#choice2")
 var $button = $(".button")
 var $button2 = $(".button2")
+var $turn = $(".turn")
 
 
 
@@ -14,6 +15,22 @@ var state = {
 }
 
 
+
+function changeTurn(){
+	if (state.turn == "Player 1"){
+		state.turn = "Player 2"
+		console.log(state.turn)
+	} else if (state.turn == "Player 2"){
+		state.turn = "Player 1"
+		console.log(state.turn)
+	}
+	$turn.append(state.turn)
+}
+
+
+
+// 1st Heap Button
+
 $button.on("click", function(){
 	if (isNaN($choice1.val())){
 		alert("Please pick a number between 1 and " + state.pieces1)
@@ -24,10 +41,13 @@ $button.on("click", function(){
 			console.log(state.pieces1)
 			if (state.pieces1 == 0){
 				console.log("heap finished")
-			}
+			} else {
+				changeTurn()
+			} 
 	}
 });
 
+// 2nd Heap Button
 
 $button2.on("click", function(){
 	if (isNaN($choice2.val())){
@@ -39,6 +59,8 @@ $button2.on("click", function(){
 			console.log(state.pieces2)
 			if (state.pieces2 == 0){
 				console.log("heap finished")
+			} else {
+				changeTurn()
 			}
 	}
 });
